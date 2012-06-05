@@ -1,0 +1,12 @@
+{% extends "styleguide/base.html" %}
+
+{% block head_styles %}
+    {{ block.super }}
+
+{% endblock %}
+
+{% block content %}
+    {% for section in sections %}
+        {% include "styleguide/styleguide_section.html" with section=section %}
+    {% endfor %}
+{% endblock content %}

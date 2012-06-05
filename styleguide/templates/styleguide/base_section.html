@@ -1,0 +1,58 @@
+<a name="section_{{ section.position }}"></a>
+
+
+<div class="styleguide-heading-{{ section.depth }}">
+    {{ section.title }}
+</div>
+
+<div class="styleguide-normal">
+    {{ section.desc|safe }}
+</div>
+
+{% if section.modifiers or section.template %}
+    <div class="styleguide-eg">
+        {% if section.modifiers %}
+            <div class="styleguide-eg-desc styleguide-normal">
+                <ul class="styleguide-eg-modifiers">
+                    {% for modifier in section.modifiers %}
+                        <li><strong>{{ modifier.modifier }}</strong>
+                            - {{ modifier.description }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if section.template %}
+            <div class="styleguide-eg-element">
+{% block section_template %}
+    {{ section.template|safe }}
+{% endblock section_template %}
+            </div>
+{# todo: these can be added back in after more browser testing #}
+{% comment %}
+            <div class="styleguide-eg-html">
+                <div class="styleguide-eg-html-expand">&gt;</div>
+                <pre class="prettyprint lang-html">
+{{ section.template|escape }}
+                </pre>
+            </div>
+{% endcomment %}
+            {% for modifier in section.modifiers %}
+                <div class="styleguide-eg-element styleguide-eg-modifier">
+                    <span class="styleguide-eg-modifier-name">{{ modifier.modifier }}</span>
+                    {{ modifier.template|safe }}
+                </div>
+{# todo: these can be added back in after more browser testing #}
+{% comment %}
+                <div class="styleguide-eg-html">
+                    <div class="styleguide-eg-html-expand">&gt;</div>
+                    <pre class="prettyprint lang-html">
+{{ modifier.template|escape }}
+                    </pre>
+                </div>
+{% endcomment %}
+            {% endfor %}
+        {% endif %}
+
+    </div>
+{% endif %}

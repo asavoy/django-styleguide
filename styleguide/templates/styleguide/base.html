@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Style Guide</title>
+
+    {% block head_styles %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}styleguide/css/styleguide.css"  type="text/css" />
+
+    {% endblock %}
+
+    <script src='{{ STATIC_URL }}styleguide/prettify/prettify.js' type='text/javascript'></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}styleguide/prettify/prettify.css"  type="text/css" />
+
+</head>
+<body onload="prettyPrint()">
+
+<div class="styleguide-normal styleguide-header">
+    {% block top %}
+        <div class="styleguide-header-title">
+            {{ guide.title }}
+        </div>
+    
+        <nav class="styleguide-rootnav">
+            <ul>
+                {% for link in top_links %}
+                    <li><a href="{{ link.1 }}">{{ link.0 }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+    {% endblock top %}
+</div>
+
+<div id="styleguide-wrapper">
+    {% block nav %}
+        <nav class="styleguide-nav styleguide-normal">
+            <ul>
+                {% for section in sections %}
+                    <li class="styleguide-depth-{{ section.depth }}">
+                        <a href="#section_{{ section.position }}">
+                            {{ section.position }}.
+                            {{ section.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    {% endblock nav %}
+
+    <div class="styleguide-content">
+        {% block content %}
+            {% for section in sections %}
+                {% include "styleguide/styleguide_section.html" with section=section %}
+            {% endfor %}
+        {% endblock content %}
+    </div>
+
+</div><!-- /#styleguide-wrapper -->
+
+</body>
+</html>
