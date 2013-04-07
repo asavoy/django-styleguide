@@ -36,12 +36,14 @@
         <nav class="styleguide-nav styleguide-normal">
             <ul>
                 {% for section in sections %}
-                    <li class="styleguide-depth-{{ section.depth }}">
-                        <a href="#section_{{ section.position }}">
-                            {{ section.position }}.
-                            {{ section.title }}
-                        </a>
-                    </li>
+                    {% if section.depth <= 1 %}
+                        <li class="styleguide-depth-{{ section.depth }}">
+                            <a href="#section_{{ section.position }}">
+                                {{ section.position }}.
+                                {{ section.title }}
+                            </a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </nav>
