@@ -2,6 +2,9 @@
 html, body {
   margin: 0;
 }
+body {
+  background: #ffffff !important;
+}
 .styleguide-clearfix{
   clear:both;
   overflow:hidden;
@@ -45,7 +48,6 @@ html, body {
 
 #styleguide-wrapper {
   width:100%;
-  background: #ffffff;
 }
 .styleguide-content {
   width:600px;
